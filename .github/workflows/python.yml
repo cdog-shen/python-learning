@@ -16,7 +16,7 @@ jobs:
       - name: Run test
         id: run_test  # 添加一个 ID 用于引用
         run: |
-          output=$(echo 'Put your test command here.' && echo "Test done.")
+          output=$(echo 'python3 src/main.py' && echo "Test done.")
           echo "::set-output name=result::$output"
 
       - name: Error report status on Feishu
@@ -31,4 +31,4 @@ jobs:
         run: |
           echo "Test succeeded. Starting success report..."
           # 在这里添加发送成功报告的命令
-           echo "python3 /opt/public_scripts/feishu_webhook_bot_sre_group.py 'Succeed' 'green' '${{ github.ref_name }} - ${{ github.run_id }}' '${{ steps.run_test.outputs.result }}' '${{ github.ref }}' "
+          echo "python3 /opt/public_scripts/feishu_webhook_bot_sre_group.py 'Succeed' 'green' '${{ github.ref_name }} - ${{ github.run_id }}' '${{ steps.run_test.outputs.result }}' '${{ github.ref }}' "
