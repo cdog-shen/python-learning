@@ -24,13 +24,11 @@ jobs:
         run: |
           echo "Test failed. Starting error report..."
           # 在这里添加发送错误报告的命令
-          python3 /opt/public_scripts/feishu_webhook_bot_sre_group.py 'Failed' 'red' "'${{ github.ref_name }} - ${{ github.run_id }}'" "${{ steps.run_test.outputs.result }}" "${{ github.ref }}"
+          sh -c "python3 /opt/public_scripts/feishu_webhook_bot_sre_group.py 'Failed' 'red' '${{ github.ref_name }} - ${{ github.run_id }}' '${{ steps.run_test.outputs.result }}' '${{ github.ref }}' "
 
       - name: Success report status on Feishu
         if: ${{ success() }}  # 仅在成功时执行
         run: |
           echo "Test succeeded. Starting success report..."
-          pwd
-          whoami
           # 在这里添加发送成功报告的命令
-          python3 /opt/public_scripts/feishu_webhook_bot_sre_group.py 'Succeed' 'green' "'${{ github.ref_name }} - ${{ github.run_id }}'" "${{ steps.run_test.outputs.result }}" "${{ github.ref }}"
+          sh -c "python3 /opt/public_scripts/feishu_webhook_bot_sre_group.py 'Succeed' 'green' '${{ github.ref_name }} - ${{ github.run_id }}' '${{ steps.run_test.outputs.result }}' '${{ github.ref }}' "
