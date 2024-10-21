@@ -16,7 +16,7 @@ jobs:
       - name: Run test
         id: run_test  # 添加一个 ID 用于引用
         run: |
-          output=$(echo 'python3 src/main.py' && echo "Test done.")
+          output=$(sh -c 'python3 src/main.py' && echo "Test done.")
           echo "::set-output name=result::$output"
 
       - name: Error report status on Feishu
