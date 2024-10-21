@@ -11,6 +11,11 @@ jobs:
     runs-on: python  # 更正为合适的 runner
 
     steps:
+      - name: Set up proxy for checkout
+        run: |
+          git config --global http.proxy http://127.0.0.1:1189
+          git config --global https.proxy http://127.0.0.1:1189
+        
       - uses: actions/checkout@v4
 
       - name: Run test
